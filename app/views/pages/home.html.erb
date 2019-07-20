@@ -1,1 +1,49 @@
-require "rails_helper"
+<section style="margin-bottom: 50px">
+  <% if current_user %>
+    <div>Welcome, <%= current_user.email  %></div>
+    <!-- note to self: the default CRUD method is GET, overriding with DELETE-->
+    <div>
+      <%= link_to 'Sign Out', destroy_user_session_path, method: :delete %>
+    </div>
+  <% else %>
+    <div>Welcome</div>
+    <div>
+      <%= link_to 'Sign Up', new_user_registration_path %>
+      <%= link_to 'Sign In', user_session_path %>
+    </div>
+  <% end %>
+</section>
+
+<section>
+  <% if current_user %>
+    <%= form_for @chunk, url: { controller: "chunks", action: "create" } do |f| %>
+      <%= label_tag(:title, "Title") %>
+      <%= text_field_tag(:title, 'title', id: "testy-title") %>
+      <%= label_tag(:duration, "How long will the chunk be?") %>
+      <%= number_field_tag(:duration, step: 1) %>
+      <%= f.submit "Create Chunk" %>
+    <% end %>
+  <% end %>
+</section>
+
+<section>
+  <% if current_user %>
+    <h3>Chunks</h3>
+    <% current_user.chunks.reverse.each do |c| %>
+      <div style="margin: 20px">
+        <div>Title: <%= c.title %></div>
+        <div>Started at: <%= c.created_at.in_time_zone("Central Time (US & Canada)").strftime("%H:%M on %m/%d/%Y") %></div>
+        <div>Duration: <%= c.duration %></div>
+
+        <div><% e = c.created_at + c.duration.minutes %></div>
+        <% if Time.now >= e %>
+          <div>Chunk Completed</div>
+        <% else %>
+          <div>Chunk in Progress</div>
+          <div>Completion at <%= e.in_time_zone("Central Time (US & Canada)").strftime("%H:%M") %></div>
+        <% end %>
+
+      </div>
+    <% end %>
+  <% end %>
+</section>
