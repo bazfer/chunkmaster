@@ -5,7 +5,7 @@ feature 'User creates a chunk' do
   title = "testy-test-".concat(rand(10).to_s)
 
   scenario 'Successful persistance' do
-    chunk = Chunk.new(user_id: 1, title: title, duration: 25)
+    chunk = Chunk.new(user_id: 4, title: title, duration: 25)
     chunk.save!
     persisted_chunk = Chunk.find_by(title: title)
 
@@ -15,10 +15,10 @@ feature 'User creates a chunk' do
   end
 
   scenario 'Successful display of new chunk' do
-    binding.pry
-    user = User.find(1)
+    user = User.find(4)
     sign_in user
-    fill_in('testy-title', with: title)
+    visit root_path
+    fill_in('title', with: title)
     fill_in('duration', with: 25)
     click_button('Create Chunk')
 

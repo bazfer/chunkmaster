@@ -18,7 +18,7 @@
   <% if current_user %>
     <%= form_for @chunk, url: { controller: "chunks", action: "create" } do |f| %>
       <%= label_tag(:title, "Title") %>
-      <%= text_field_tag(:title, 'title', id: "testy-title") %>
+      <%= text_field_tag(:title, 'title', id: "title") %>
       <%= label_tag(:duration, "How long will the chunk be?") %>
       <%= number_field_tag(:duration, step: 1) %>
       <%= f.submit "Create Chunk" %>
