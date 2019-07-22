@@ -16,12 +16,16 @@
 
 <section>
   <% if current_user %>
-    <%= form_for @chunk, :url => { controller: "chunks", action: "create" } do |f| %>
-      <%= label_tag(:title, "Title") %>
-      <%= text_field_tag(:title, nil, id: "title") %>
-      <%= label_tag(:duration, "How long will the chunk be?") %>
-      <%= number_field_tag(:duration, step: 1) %>
-      <%= f.submit "Create Chunk" %>
+    <% if @chunking %>
+      You are currently chunking.
+    <% else %>
+      <%= form_for @chunk, :url => { controller: "chunks", action: "create" } do |f| %>
+        <%= label_tag(:title, "Title") %>
+        <%= text_field_tag(:title, nil, id: "title") %>
+        <%= label_tag(:duration, "How long will the chunk be?") %>
+        <%= number_field_tag(:duration, step: 1) %>
+        <%= f.submit "Create Chunk" %>
+      <% end %>
     <% end %>
   <% end %>
 </section>
@@ -42,7 +46,6 @@
           <div>Chunk in Progress</div>
           <div>Completion at <%= e.in_time_zone("Central Time (US & Canada)").strftime("%H:%M") %></div>
         <% end %>
-
       </div>
     <% end %>
   <% end %>

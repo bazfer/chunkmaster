@@ -1,8 +1,4 @@
 class ChunksController < ApplicationController
-  def new
-    @chunk = Chunk.new
-  end
-
   def create
     @chunk = Chunk.create(chunk_params)
     redirect_to root_path
