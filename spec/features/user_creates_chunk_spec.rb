@@ -2,7 +2,7 @@ require 'rails_helper'
 require 'pry'
 
 feature 'User creates a chunk' do
-  title = "testy-test-".concat(rand(10).to_s)
+  title = 'testy-test-'.concat(rand(10).to_s)
 
   scenario 'Successful persistance' do
     chunk = Chunk.new(user_id: 4, title: title, duration: 25)

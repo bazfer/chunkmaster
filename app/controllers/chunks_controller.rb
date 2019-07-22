@@ -1,14 +1,17 @@
 class ChunksController < ApplicationController
   def new
+    @chunk = Chunk.new
   end
 
   def create
-    @chunk = Chunk.new
-    @chunk.user_id = current_user.id
-    @chunk.title = params["title"]
-    @chunk.duration = params["duration"]
-    @chunk.created_at = Time.now
-    @chunk.save!
+    @chunk = Chunk.create(chunk_params)
     redirect_to root_path
+  end
+
+  private
+
+  def chunk_params
+    params[:user_id] = current_user.id
+    params.except(:authenticity_token, :commit).permit(:user_id, :title, :duration)
   end
 end

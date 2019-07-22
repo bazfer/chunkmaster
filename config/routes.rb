@@ -3,5 +3,7 @@ Rails.application.routes.draw do
 
   root to: "pages#home"
 
+  get '/users/sign_out', to: 'pages#home'
+
   resources :chunks
 end
