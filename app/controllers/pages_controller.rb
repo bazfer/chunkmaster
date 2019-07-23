@@ -7,5 +7,6 @@ class PagesController < ApplicationController
         payload || Time.now < (chunk.created_at + chunk.duration.minutes)
       end
     end
+    @chunking = false
   end
 end

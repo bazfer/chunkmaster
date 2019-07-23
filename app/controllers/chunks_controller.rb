@@ -1,6 +1,7 @@
 class ChunksController < ApplicationController
   def create
     @chunk = Chunk.create(chunk_params)
+    ChunkChannel.broadcast_to(@user, @chunk)
     redirect_to root_path
   end
 
