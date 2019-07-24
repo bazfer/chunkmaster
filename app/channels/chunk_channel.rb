@@ -3,7 +3,6 @@ class ChunkChannel < ApplicationCable::Channel
     # stream_from "some_channel"
     user = current_user
     chunk = user.chunks.last
-    binding.pry
     stream_for chunk
   end
 
