@@ -3,6 +3,7 @@ class ChunkChannel < ApplicationCable::Channel
     # stream_from "some_channel"
     user = current_user
     chunk = user.chunks.last
+    binding.pry
     stream_for chunk
   end
 
@@ -11,6 +12,6 @@ class ChunkChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    # Any cleanup needed when channel is unsubscribed
+    stop_all_streams
   end
 end

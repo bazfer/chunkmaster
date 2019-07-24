@@ -1,6 +1,9 @@
 import consumer from "./consumer"
 
-consumer.subscriptions.create("ChunkChannel", {
+consumer.subscriptions.create(
+  {
+    channel: "ChunkChannel"
+  }, {
   connected() {
     // Called when the subscription is ready for use on the server
     console.log('Cable Connected')
@@ -15,3 +18,5 @@ consumer.subscriptions.create("ChunkChannel", {
     console.log(data)
   }
 });
+
+console.log('after')
