@@ -1,0 +1,5 @@
+<%= form_for @room, :url => { controller: "rooms", action: "create" }  do |f| %>
+  <%= label_tag(:name, "Name") %>
+  <%= text_field_tag(:name) %>
+  <%= f.submit "Create Room" %>
+<% end %>

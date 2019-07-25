@@ -1,0 +1,15 @@
+<h1>CHAT</h1>
+
+<%= link_to new_room_path do %>
+  New Room
+<% end %>
+
+<div style="margin-top: 1em">
+  <% if @rooms.present? %>
+    <% @rooms.each do |room| %>
+      <%= link_to room.name, room_path(room) %>
+    <% end %>
+  <% else %>
+    No rooms
+  <% end %>
+</div>
