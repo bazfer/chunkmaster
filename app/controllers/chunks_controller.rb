@@ -2,7 +2,6 @@ class ChunksController < ApplicationController
   before_action :load_entities
 
   def create
-    ChunkChannel.broadcast_to(@user, @chunk)
   end
 
   protected
