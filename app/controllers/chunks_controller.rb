@@ -1,5 +1,7 @@
 class ChunksController < ApplicationController
   before_action :load_entities
+  def show
+  end
 
   def create
   end
