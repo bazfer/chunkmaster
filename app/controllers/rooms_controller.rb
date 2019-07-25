@@ -35,6 +35,10 @@ class RoomsController < ApplicationController
   def show
     @room_message = RoomMessage.new room: @room
     @room_messages = @room.room_messages.includes(:user)
+    respond_to do |format|
+      format.html
+      format.json { render json: @room }
+    end
   end
 
   protected

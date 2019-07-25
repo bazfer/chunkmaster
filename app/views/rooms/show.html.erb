@@ -1,15 +1,23 @@
 <h1><<%= @room.name %></h1>
 
+<h3 id="room_id">Room: <%= @room.name %></h3>
 
-<% @room_messages.each do |room_message| %>
-  <%= room_message.message %>
-<% end %>
+<div class="chat" data-channel-subscribe="room" data-room-id="<%= @room.id %>">
+  <% @room_messages.each do |room_message| %>
+    <div data-role="message-template">
+      <div data-role="chat-message-container">
+        <div data-role="message-text"><%= room_message.message %></div>
+        <!-- <small data-role="message-date"><%= room_message.created_at %></small> -->
+      </div>
+    </div>
+  <% end %>
+</div>
 
-<h3>Room: <%= @room.id %></h3>
-
-<%= form_for @room_message, :url => { controller: "room_messages", action: "create"} do |f| %>
-  <%= label_tag(:message, "Message") %>
-  <%= text_field_tag(:message) %>
-  <%= hidden_field_tag :room_id, @room.id %>
-  <%= f.submit "Send Message" %>
-<% end %>
+<div style="margin-top: 2em">
+  <%= form_for @room_message, :url => { controller: "room_messages", action: "create"} do |f| %>
+    <%= label_tag(:message, "Message") %>
+    <%= text_field_tag(:message) %>
+    <%= hidden_field_tag :room_id, @room.id %>
+    <%= f.submit "Send Message" %>
+  <% end %>
+</div>
