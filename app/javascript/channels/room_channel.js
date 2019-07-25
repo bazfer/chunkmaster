@@ -1,11 +1,12 @@
-import consumer from "./consumer"
+import consumer from './consumer'
 
+// tightly coupled to the current path but after many different tries this is what got it done
 const path = window.location.pathname.split('/')
 const room_id = path[2]
 
 consumer.subscriptions.create(
   {
-    channel: "RoomChannel",
+    channel: 'RoomChannel',
     room_id: room_id
   },
   {
@@ -22,8 +23,8 @@ consumer.subscriptions.create(
       // Called when there's incoming data on the websocket for this channel
       const roomContainer = document.getElementById('room-container')
       const message = document.createElement('div')
-      message.innerHTML = `${data.message}`
-      message.setAttribute("id", data.id)
+      message.innerHTML = data.message
+      message.setAttribute('id', data.id)
       roomContainer.appendChild(message)
     }
   }

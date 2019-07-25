@@ -9,7 +9,7 @@
 </div>
 
 <div style="margin-top: 2em">
-  <%= form_for @room_message, :url => { controller: "room_messages", action: "create"} do |f| %>
+  <%= form_for @room_message, :url => { controller: "room_messages", action: "create"}, :data => { :remote => true } do |f| %>
     <%= label_tag(:message, "Message") %>
     <%= text_field_tag(:message) %>
     <%= hidden_field_tag :room_id, @room.id %>
