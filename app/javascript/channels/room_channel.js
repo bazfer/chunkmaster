@@ -1,12 +1,12 @@
 import consumer from "./consumer"
 
-const pathArray = window.location.pathname.split('/')
-const secondLevelLocation = pathArray[2]
+const path = window.location.pathname.split('/')
+const room_id = path[2]
 
 consumer.subscriptions.create(
   {
     channel: "RoomChannel",
-    room_id: secondLevelLocation
+    room_id: room_id
   },
   {
     connected() {
@@ -20,7 +20,11 @@ consumer.subscriptions.create(
 
     received(data) {
       // Called when there's incoming data on the websocket for this channel
-      console.log(data)
+      const roomContainer = document.getElementById('room-container')
+      const message = document.createElement('div')
+      message.innerHTML = `${data.message}`
+      message.setAttribute("id", data.id)
+      roomContainer.appendChild(message)
     }
   }
 );
