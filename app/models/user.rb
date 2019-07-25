@@ -4,6 +4,6 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
-  has_many :chunks
+  has_many :chunks, inverse_of: :user
   has_many :room_messages
 end
