@@ -2,6 +2,7 @@ class CreateChunks < ActiveRecord::Migration[6.0]
   def change
     create_table :chunks do |t|
       t.belongs_to :user, index: true
+      t.belongs_to :chunk_feed, index: true
 
       t.string :title
       t.integer :duration

@@ -7,7 +7,7 @@ class ChunksController < ApplicationController
                           title: params[:title],
                           duration: params[:duration]
     binding.pry
-    ChunkFeedChannel.broadcast_to(@chunk_feed, @chunk)
+    # ChunkFeedChannel.broadcast_to(@chunk_feed, @chun  k)
   end
 
   protected
