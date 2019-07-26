@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_26_160916) do
+ActiveRecord::Schema.define(version: 2019_07_26_173155) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,13 +19,12 @@ ActiveRecord::Schema.define(version: 2019_07_26_160916) do
     t.bigint "user_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["id"], name: "index_chunk_feeds_on_id", unique: true
     t.index ["user_id"], name: "index_chunk_feeds_on_user_id"
   end
 
   create_table "chunks", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "chunk_feed_id"
+    t.bigint "user_id", null: false
+    t.bigint "chunk_feed_id", null: false
     t.string "title"
     t.integer "duration"
     t.datetime "completed_at"
@@ -66,6 +65,8 @@ ActiveRecord::Schema.define(version: 2019_07_26_160916) do
   end
 
   add_foreign_key "chunk_feeds", "users"
+  add_foreign_key "chunks", "chunk_feeds"
+  add_foreign_key "chunks", "users"
   add_foreign_key "room_messages", "rooms"
   add_foreign_key "room_messages", "users"
 end

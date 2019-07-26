@@ -1,8 +1,8 @@
 class CreateChunks < ActiveRecord::Migration[6.0]
   def change
     create_table :chunks do |t|
-      t.belongs_to :user, index: true
-      t.belongs_to :chunk_feed, index: true
+      t.references :user, null: false, foreign_key: true
+      t.references :chunk_feed, null: false, foreign_key: true
 
       t.string :title
       t.integer :duration
