@@ -4,17 +4,19 @@
     <ul id='chunks-list' style="list-style: none">
       <% current_user.chunks.reverse.each do |c| %>
         <li style="margin: 20px" id=<%= c.id %>>
-          <div>Title: <%= c.title %></div>
-          <div>Started at: <%= c.created_at.in_time_zone("Central Time (US & Canada)").strftime("%H:%M on %m/%d/%Y") %></div>
-          <div>Duration: <%= c.duration %></div>
+          <div>
+            <div>Title: <%= c.title %></div>
+            <div>Started at: <%= c.created_at.in_time_zone("Central Time (US & Canada)").strftime("%H:%M on %m/%d/%Y") %></div>
+            <div>Duration: <%= c.duration %></div>
 
-          <div><% e = c.created_at + c.duration.minutes %></div>
-          <% if Time.now >= e %>
-            <div>Chunk Completed</div>
-          <% else %>
-            <div>Chunk in Progress</div>
-            <div>Completion at <%= e.in_time_zone("Central Time (US & Canada)").strftime("%H:%M") %></div>
-          <% end %>
+            <div><% e = c.created_at + c.duration.minutes %></div>
+            <% if Time.now >= e %>
+              <div>Chunk Completed</div>
+            <% else %>
+              <div>Chunk in Progress</div>
+              <div>Completion at <%= e.in_time_zone("Central Time (US & Canada)").strftime("%H:%M") %></div>
+            <% end %>
+          </div>
         </li>
       <% end %>
     </ul>

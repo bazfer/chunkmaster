@@ -15,14 +15,15 @@ consumer.subscriptions.create(
     received(data) {
       console.log('Incoming Chunk')
 
-      var feedContainer, chunk
+      var feedContainer, lastChunk, chunk
       feedContainer = document.getElementById('chunk-feed-container')
-      chunk = document.createElement('div')
-      console.log(data)
+      lastChunk = document.getElementById('chunk-feed-container').firstElementChild
+      chunk = document.createElement('li')
 
       chunk.innerHTML = data.title
+
       chunk.setAttribute('id', data.id)
-      feedContainer.appendChild(chunk)
+      feedContainer.insertBefore(chunk, lastChunk)
     }
   }
 )
