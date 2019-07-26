@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :chunks
+  resources :chunk_feeds
   resources :room_messages
   resources :rooms
 

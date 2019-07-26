@@ -1,0 +1,2 @@
+class ChunkFeedsController < ApplicationController
+end

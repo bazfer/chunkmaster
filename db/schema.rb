@@ -10,10 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_24_192511) do
+ActiveRecord::Schema.define(version: 2019_07_26_003855) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "chunk_feeds", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["id"], name: "index_chunk_feeds_on_id", unique: true
+    t.index ["user_id"], name: "index_chunk_feeds_on_user_id"
+  end
 
   create_table "chunks", force: :cascade do |t|
     t.bigint "user_id"
@@ -23,6 +31,8 @@ ActiveRecord::Schema.define(version: 2019_07_24_192511) do
     t.datetime "cancelled_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "chunk_feed_id"
+    t.index ["chunk_feed_id"], name: "index_chunks_on_chunk_feed_id"
     t.index ["user_id"], name: "index_chunks_on_user_id"
   end
 
@@ -55,6 +65,8 @@ ActiveRecord::Schema.define(version: 2019_07_24_192511) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "chunk_feeds", "users"
+  add_foreign_key "chunks", "chunk_feeds"
   add_foreign_key "room_messages", "rooms"
   add_foreign_key "room_messages", "users"
 end
