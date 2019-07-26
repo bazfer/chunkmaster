@@ -3,11 +3,13 @@
     <% if @chunking %>
       <h3>You are currently chunking</h3>
     <% else %>
-      <%= form_for @chunk, :url => { controller: "chunks", action: "create" } do |f| %>
+      <%= form_for @chunk, url: { controller: "chunks", action: "create" }, data: { remote: true } do |f| %>
+
         <%= label_tag(:title, "Title") %>
         <%= text_field_tag(:title, nil, id: "title") %>
         <%= label_tag(:duration, "How long will the chunk be?") %>
         <%= number_field_tag(:duration, step: 1) %>
+        <%= hidden_field_tag(:chunk_feed_id, current_user.chunk_feed.id) %>
 
         <%= f.submit "Create Chunk" %>
       <% end %>

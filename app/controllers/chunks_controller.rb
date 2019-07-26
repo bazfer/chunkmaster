@@ -1,21 +1,18 @@
 class ChunksController < ApplicationController
   before_action :load_entities
 
-  def show
-  end
-
   def create
-    ChunkChannel.broadcast_to(@chunk, {})
+    @chunk = Chunk.create user: current_user,
+                          chunk_feed_id: @chunk_feed_id,
+                          title: params[:title],
+                          duration: params[:duration]
+    binding.pry
+    ChunkFeedChannel.broadcast_to(@chunk_feed, @chunk)
   end
 
   protected
 
   def load_entities
-    @chunk = Chunk.create(permitted_parameters)
-  end
-
-  def permitted_parameters
-    params[:user_id] = current_user.id
-    params.except(:authenticity_token, :commit).permit(:user_id, :title, :duration)
+    @chunk_feed_id = ChunkFeed.find(params.dig(:chunk_feed_id)).id
   end
 end

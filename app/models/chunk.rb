@@ -3,5 +3,5 @@ class Chunk < ApplicationRecord
   validates :duration, presence: true, numericality: { only_integer: true }
 
   belongs_to :user, optional: true, inverse_of: :chunks
-  belongs_to :chunk_feed, index: true
+  belongs_to :chunk_feed, foreign_key: true
 end

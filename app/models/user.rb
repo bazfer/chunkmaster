@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :chunks, inverse_of: :user
   has_many :room_messages
+  has_one :chunk_feed
 end

@@ -15,19 +15,5 @@
   <% end %>
 </section>
 
-<section>
-  <% if current_user %>
-    <% if @chunking %>
-      <h3>You are currently chunking</h3>
-    <% else %>
-      <%= form_for @chunk, :url => { controller: "chunks", action: "create" } do |f| %>
-        <%= label_tag(:title, "Title") %>
-        <%= text_field_tag(:title, nil, id: "title") %>
-        <%= label_tag(:duration, "How long will the chunk be?") %>
-        <%= number_field_tag(:duration, step: 1) %>
-        <%= f.submit "Create Chunk" %>
-      <% end %>
-    <% end %>
-  <% end %>
-</section>
+<%= render partial: './chunks/new' %>
 
