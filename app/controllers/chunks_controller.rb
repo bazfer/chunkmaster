@@ -1,9 +1,11 @@
 class ChunksController < ApplicationController
   before_action :load_entities
+
   def show
   end
 
   def create
+    ChunkChannel.broadcast_to(@chunk, {})
   end
 
   protected

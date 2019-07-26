@@ -8,6 +8,7 @@
         <%= text_field_tag(:title, nil, id: "title") %>
         <%= label_tag(:duration, "How long will the chunk be?") %>
         <%= number_field_tag(:duration, step: 1) %>
+
         <%= f.submit "Create Chunk" %>
       <% end %>
     <% end %>
