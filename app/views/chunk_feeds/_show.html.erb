@@ -4,12 +4,12 @@
     <h3 id="testy">Chunks</h3>
     <ul id='chunk-feed-container' style="list-style: none">
       <% current_user.chunk_feed.chunks.reverse.each do |c| %>
-        <li style="margin: 20px" id=<%= c.id %>>
+        <li style="margin: 20px 0px" id=<%= c.id %>>
           <div>Title: <%= c.title %></div>
           <div>Started at: <%= c.created_at.in_time_zone("Central Time (US & Canada)").strftime("%H:%M on %m/%d/%Y") %></div>
           <div>Duration: <%= c.duration %></div>
 
-          <div><% e = c.created_at + c.duration.minutes %></div>
+          <% e = c.created_at + c.duration.minutes %>
           <% if Time.now >= e %>
             <div>Chunk Completed</div>
           <% else %>

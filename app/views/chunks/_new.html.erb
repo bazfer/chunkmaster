@@ -3,7 +3,7 @@
     <% if @chunking %>
       <h3>You are currently chunking</h3>
     <% else %>
-      <%= form_for @chunk, url: { controller: "chunks", action: "create" }, data: { remote: true } do |f| %>
+      <%= form_for @chunk, url: { controller: "chunks", action: "create" }, :html => { :onsubmit => "this.submit(); this.reset();" }, data: { remote: true } do |f| %>
 
         <%= label_tag(:title, "Title") %>
         <%= text_field_tag(:title, nil, id: "title") %>

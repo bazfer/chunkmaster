@@ -15,15 +15,20 @@ consumer.subscriptions.create(
     received(data) {
       console.log('Incoming Chunk')
 
-      var feedContainer, lastChunk, chunk
-      feedContainer = document.getElementById('chunk-feed-container')
-      lastChunk = document.getElementById('chunk-feed-container').firstElementChild
-      chunk = document.createElement('li')
+      let feedContainer = document.getElementById('chunk-feed-container')
+      let lastChunk = document.getElementById('chunk-feed-container').firstElementChild
+      let chunkContainer = document.createElement('li')
 
-      chunk.innerHTML = data.title
+      let chunk = `<div>
+                      <div>Title: ${data.title} </div>
+                      <div>Started at: ${data.created_at} </div>
+                      <div>Duration: ${data.duration}</div>
+                  </div>`
 
-      chunk.setAttribute('id', data.id)
-      feedContainer.insertBefore(chunk, lastChunk)
+      chunkContainer.innerHTML = chunk
+
+      chunkContainer.setAttribute('id', data.id)
+      feedContainer.insertBefore(chunkContainer, lastChunk)
     }
   }
 )
