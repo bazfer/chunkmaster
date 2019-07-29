@@ -6,14 +6,15 @@ class ChunksController < ApplicationController
                           chunk_feed: @chunk_feed,
                           title: params[:title],
                           duration: params[:duration]
-    @chunk.save
+
+    if @chunk.save
+      duration = params[:duration].to_i
+      CompleteChunkJob.set(wait: duration.minutes).perform_later(@chunk)
+    else
+      puts 'TODO'
+    end
 
     ChunkFeedChannel.broadcast_to(@chunk_feed, @chunk)
-    # binding.pry
-    # if @chunk
-    #   duration = params[:duration].to_i
-    #   CompleteChunkJob.set(wait: duration.minutes).perform_later(@chunk)
-    # end
   end
 
   protected
