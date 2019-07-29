@@ -3,7 +3,7 @@
     <%= hidden_field_tag :chunk_feed_id, current_user.chunk_feed.id, id: 'chunk-feed-id' %>
     <h3 id="testy">Chunks</h3>
     <ul id='chunk-feed-container' style="list-style: none">
-      <% current_user.chunk_feed.chunks.reverse.each do |c| %>
+      <% current_user.chunk_feed.chunks.sort.reverse.each do |c| %>
         <li style="margin: 20px 0px" id=<%= c.id %>>
           <div>Title: <%= c.title %></div>
           <div>Started at: <%= c.created_at.in_time_zone("Central Time (US & Canada)").strftime("%H:%M on %m/%d/%Y") %></div>
