@@ -14,7 +14,7 @@
         <div>Chunk in Progress</div>
         <div>Completion at</div>
       </li>
-      <% current_user.chunk_feed.chunks.sort.reverse.each do |c| %>
+      <% current_user.chunk_feed.behead.each do |c| %>
         <li class="chunk" id=<%= c.id %> >
           <div>Title: <%= c.title %></div>
           <div>Started at: <%= c.created_at.in_time_zone("Central Time (US & Canada)").strftime("%H:%M on %m/%d/%Y") %></div>

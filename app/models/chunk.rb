@@ -8,4 +8,8 @@ class Chunk < ApplicationRecord
   def completed?
     Time.now > (created_at + duration.minutes)
   end
+
+  def seconds_to_completion
+    ((created_at + duration.minutes) - Time.now) / 3600
+  end
 end

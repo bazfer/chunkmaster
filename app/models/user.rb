@@ -8,6 +8,9 @@ class User < ApplicationRecord
   has_many :chunks, inverse_of: :user
   has_many :room_messages
 
+  # gotta convert this to a SQL query at some point
+  # also, this will not scale
+  # gotta write some stress tests
   def chunking?
     chunks.inject(false) do |status, chunk|
       status || Time.now < (chunk.created_at + chunk.duration.minutes)
