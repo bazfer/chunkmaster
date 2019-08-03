@@ -2,33 +2,10 @@
   <% if current_user %>
     <%= hidden_field_tag :chunk_feed_id, current_user.chunk_feed.id, id: 'chunk-feed-id' %>
     <h3 id="testy">Chunks</h3>
-    <ul id='chunk-feed-container' style="list-style: none">
-      <li data-controller="active-chunk" id="active-chunk" class="chunk active-chun">
-        <div data-target="active-chunk.title">Title:</div>
-        <div data-target="active-chunk.started-at">Started at:</div>
-        <div data-target="active-chunk-duration">Duration:</div>
-
-
-        <div>Chunk Completed</div>
-        <div>OR</div>
-        <div>Chunk in Progress</div>
-        <div>Completion at</div>
-      </li>
-      <% current_user.chunk_feed.behead.each do |c| %>
-        <li class="chunk" id=<%= c.id %> >
-          <div>Title: <%= c.title %></div>
-          <div>Started at: <%= c.created_at.in_time_zone("Central Time (US & Canada)").strftime("%H:%M on %m/%d/%Y") %></div>
-          <div>Duration: <%= c.duration %></div>
-
-          <% e = c.created_at + c.duration.minutes %>
-          <% if Time.now >= e %>
-            <div>Chunk Completed</div>
-          <% else %>
-            <div>Chunk in Progress</div>
-            <div>Completion at <%= e.in_time_zone("Central Time (US & Canada)").strftime("%H:%M") %></div>
-          <% end %>
-        </li>
-      <% end %>
-    </ul>
+    <% if current_user.chunking? %>
+      <%= render partial: 'chunk_feeds/chunking' %>
+    <% else %>
+      <%= render partial: 'chunk_feeds/not_chunking' %>
+    <% end %>
   <% end %>
 </section>

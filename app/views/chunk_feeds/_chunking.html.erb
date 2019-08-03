@@ -1,0 +1,22 @@
+<ul id='chunk-feed-container' style="list-style: none">
+  <li data-controller="active-chunk" id="active-chunk" class="chunk active-chunk active-chunk--visible ">
+    <div data-target="active-chunk.title">Title: <%= current_user.chunk_feed.head.title %></div>
+    <div data-target="active-chunk.started-at">Started at: <%= current_user.chunk_feed.head.created_at %></div>
+    <div data-target="active-chunk-duration">Duration: <%= current_user.chunk_feed.head.duration %></div>
+    <div>Chunk in Progress</div>
+    <div>Completion at: <%= current_user.chunk_feed.head.completion_at %></div>
+  </li>
+
+  <% current_user.chunk_feed.tail.each do |c| %>
+    <li class="chunk" id=<%= c.id %> >
+      <div>Title: <%= c.title %></div>
+      <div>Started at: <%= c.created_at %></div>
+      <div>Duration: <%= c.duration %></div>
+
+      <% if Time.now >= c.completion_at %>
+        <div>Chunk Completed</div>
+        <div>Completed at: <%= c.completion_at %></div>
+      <% end %>
+    </li>
+  <% end %>
+<ul>

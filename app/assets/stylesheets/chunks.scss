@@ -9,6 +9,8 @@
   display: none;
 }
 
-.active-chunk--visible .active-chunk {
-  display: initial;
+.active-chunk.active-chunk--visible {
+  display: block;
+  border: 1px solid red;
+
 }
