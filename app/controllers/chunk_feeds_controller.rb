@@ -14,6 +14,9 @@ class ChunkFeedsController < ApplicationController
     end
   end
 
+  def update
+  end
+
   protected
 
   def load_entities

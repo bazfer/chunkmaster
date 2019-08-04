@@ -1,5 +1,4 @@
-<ul id='chunk-feed-container' style="list-style: none">
-  <li data-controller="active-chunk" id="active-chunk" class="chunk active-chunk active-chunk--visible">
+ <li data-controller="active-chunk" id="active-chunk" class="chunk active-chunk <%= cssClass %>">
     <div>
       <div>Chunk in Progress</div>
       <span data-target="active-chunk.completion-at">Completion at: <%= @chunk_feed.head.completion_at %></span>
@@ -20,8 +19,3 @@
       <span data-target="active-chunk-duration"><%= chunk.duration %></span>
     </div>
   </li>
-
-  <% @chunk_feed.tail.each do |chunk| %>
-    <%= render partial: './chunks/show', locals: { chunk: chunk } %>
-  <% end %>
-<ul>
