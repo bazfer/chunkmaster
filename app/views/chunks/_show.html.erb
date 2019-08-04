@@ -1,0 +1,10 @@
+<li class="chunk" id=<%= @chunk.id %> >
+  <div>Title: <%= chunk.title %></div>
+  <div>Started at: <%= chunk.created_at %></div>
+  <div>Duration: <%= chunk.duration %></div>
+
+  <% if Time.now >= chunk.completion_at %>
+    <div>Chunk Completed</div>
+    <div>Completed at: <%= chunk.completion_at %></div>
+  <% end %>
+</li>

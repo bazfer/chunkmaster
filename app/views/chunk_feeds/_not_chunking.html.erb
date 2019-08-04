@@ -7,16 +7,7 @@
     <div>Completion at</div>
   </li>
 
-  <% current_user.chunk_feed.sorted.each do |c| %>
-    <li class="chunk" id=<%= c.id %> >
-      <div>Title: <%= c.title %></div>
-      <div>Started at: <%= c.created_at %></div>
-      <div>Duration: <%= c.duration %></div>
-
-      <% if Time.now >= c.completion_at %>
-        <div>Chunk Completed</div>
-        <div>Completed at: <%= c.completion_at %></div>
-      <% end %>
-    </li>
+  <% current_user.chunk_feed.sorted.each do |chunk| %>
+    <%= render partial: './chunks/show', locals: { chunk: chunk} %>
   <% end %>
 <ul>
