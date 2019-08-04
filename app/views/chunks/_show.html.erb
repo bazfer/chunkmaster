@@ -1,10 +1,26 @@
 <li class="chunk" id=<%= @chunk.id %> >
-  <div>Title: <%= chunk.title %></div>
-  <div>Started at: <%= chunk.created_at %></div>
-  <div>Duration: <%= chunk.duration %></div>
+  <%= form_for :chunk do |f| %>
+    <% if Time.now >= chunk.completion_at %>
+      <div>
+        <h3>Chunk Completed!</h3>
+        <%= label_tag(:completed_at) %>
+        <%= text_field_tag(:completed_at, chunk.completed_at) %>
+      </div>
+    <% end %>
 
-  <% if Time.now >= chunk.completion_at %>
-    <div>Chunk Completed</div>
-    <div>Completed at: <%= chunk.completion_at %></div>
+    <div>
+      <%= label_tag(:title, "Title:") %>
+      <%= text_field_tag(:title, chunk.title,  { readonly: true }) %>
+    </div>
+
+    <div>
+      <%= label_tag(:created_at, "Started at:") %>
+      <%= text_field_tag(:created_at, chunk.created_at, readonly: true) %>
+    </div>
+
+    <div>
+      <%= label_tag(:duration, "Duration:") %>
+      <%= text_field_tag(:duration, chunk.duration, readonly: true) %>
+    </div>
   <% end %>
 </li>

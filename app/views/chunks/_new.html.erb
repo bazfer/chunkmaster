@@ -9,9 +9,11 @@
       <%= label_tag(:title, "Title") %>
       <%= text_field_tag(:title, nil, { id: "title",
                                         data: { target: "chunk-feed.title" } }) %>
+
       <%= label_tag(:duration, "How long will the chunk be?") %>
       <%= number_field_tag(:duration, nil, { step: 1,
                                         data: { target: "chunk-feed.duration" } }) %>
+
       <%= hidden_field_tag(:chunk_feed_id, current_user.chunk_feed.id) %>
 
       <%= f.submit "Create Chunk", data: { action: "chunk-feed#create" } %>

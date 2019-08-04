@@ -23,13 +23,7 @@ consumer.subscriptions.create(
         let lastChunk = document.getElementById('chunk-feed-container').firstElementChild
         let chunkContainer = document.createElement('li')
 
-        let chunk = `<div>
-                        <div>Title: ${data.title} </div>
-                        <div>Started at: ${data.created_at} </div>
-                        <div>Duration: ${data.duration}</div>
-                    </div>`
-
-        chunkContainer.innerHTML = chunk
+        chunkContainer.innerHTML = 'RECEIVED DATA'
 
         chunkContainer.setAttribute('id', data.id)
         feedContainer.insertBefore(chunkContainer, lastChunk)

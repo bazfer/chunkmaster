@@ -8,6 +8,6 @@
   </li>
 
   <% current_user.chunk_feed.sorted.each do |chunk| %>
-    <%= render partial: './chunks/show', locals: { chunk: chunk} %>
+    <%= render partial: './chunks/show', locals: { chunk: chunk } %>
   <% end %>
 <ul>
