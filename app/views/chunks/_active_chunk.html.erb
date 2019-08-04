@@ -1,6 +1,6 @@
  <li data-controller="active-chunk" id="active-chunk" class="chunk active-chunk <%= cssClass %>">
     <div>
-      <div>Chunk in Progress</div>
+      <h3 data-target="active-chunk.status">Chunk in Progress</h3>
       <span data-target="active-chunk.completion-at">Completion at: <%= @chunk_feed.head.completion_at %></span>
     </div>
 
