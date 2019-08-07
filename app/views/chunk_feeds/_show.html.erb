@@ -1,10 +1,10 @@
-<section data-controller="chunk-feed">
+<section data-controller='chunk-feed'>
   <% if current_user %>
     <%= hidden_field_tag :chunk_feed_id, @chunk_feed.id, id: 'chunk-feed-id' %>
 
     <%= render partial: './chunks/new' %>
 
-    <ul id='chunk-feed-container' style="list-style: none">
+    <ul data-target='chunk-feed.container' id='chunk-feed-container' style="list-style: none">
       <% @chunk_feed.sorted.each do |chunk| %>
         <%= render partial: './chunks/show', locals: { chunk: chunk } %>
       <% end %>

@@ -1,13 +1,12 @@
 import { Controller } from 'stimulus'
 import consumer from '../channels/consumer'
-import baseChunk from '../shared/base_chunk'
+import chunkFactory from '../shared/chunk_factory'
 
 const cable = consumer
 const chunk_feed = document.getElementById("chunk-feed-id")
-const base = baseChunk
-
 
 export default class extends Controller {
+  static targets = [ "container", "title", "duration" ]
 
   connect() {
     console.log('Chunk Feed Controller: Connected')
@@ -44,13 +43,14 @@ export default class extends Controller {
     // instead use indexes -- other wise a lot of CSS maneuvering needs to be done
     // after every chunk without reload
 
-    const list = document.getElementById('chunk-feed-container')
+    const list = this.containerTarget
+    const chunk = document.createElement('li')
+    const content = chunkFactory({ title: this.titleTarget.value, duration: this.durationTarget.value })
 
-    let chunk = document.createElement('li')
-    let inner = base('XXX')
-    chunk.innerHTML = inner
-    console.log('complete')
-
+    chunk.innerHTML = content
+    chunk.classList.add('chunk')
     list.insertBefore(chunk, list.firstChild)
+
+    console.log('Chunk Created and Rendered')
   }
 }
