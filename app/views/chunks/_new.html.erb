@@ -1,22 +1,24 @@
 <section>
-  <% if current_user.chunking? %>
-    <h3>You are currently chunking</h3>
-  <% else %>
-    <%= form_for @chunk, url: { controller: "chunks", action: "create" },
-                         html: { onsubmit: "this.submit(); this.reset();" },
-                         data: { remote: true } do |f| %>
+  <% if current_user %>
+    <% if current_user.chunking? %>
+      <h3>You are currently chunking</h3>
+    <% else %>
+      <%= form_for @chunk, url: { controller: "chunks", action: "create" },
+                          html: { onsubmit: "this.submit(); this.reset();" },
+                          data: { remote: true } do |f| %>
 
-      <%= label_tag(:title, "Title") %>
-      <%= text_field_tag(:title, nil, { id: "title",
-                                        data: { target: "chunk-feed.title" } }) %>
+        <%= label_tag(:title, "Title") %>
+        <%= text_field_tag(:title, nil, { id: "title",
+                                          data: { target: "chunk-feed.title" } }) %>
 
-      <%= label_tag(:duration, "How long will the chunk be?") %>
-      <%= number_field_tag(:duration, nil, { step: 1,
-                                        data: { target: "chunk-feed.duration" } }) %>
+        <%= label_tag(:duration, "How long will the chunk be?") %>
+        <%= number_field_tag(:duration, nil, { step: 1,
+                                          data: { target: "chunk-feed.duration" } }) %>
 
-      <%= hidden_field_tag(:chunk_feed_id, current_user.chunk_feed.id) %>
+        <%= hidden_field_tag(:chunk_feed_id, current_user.chunk_feed.id) %>
 
-      <%= f.submit "Create Chunk", data: { action: "chunk-feed#create" } %>
+        <%= f.submit "Create Chunk", data: { action: "chunk-feed#create" } %>
+      <% end %>
     <% end %>
   <% end %>
 </section>
