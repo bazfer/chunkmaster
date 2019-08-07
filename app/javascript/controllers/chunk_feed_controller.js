@@ -6,7 +6,7 @@ const cable = consumer
 const chunk_feed = document.getElementById("chunk-feed-id")
 
 export default class extends Controller {
-  static targets = [ "container", "title", "duration" ]
+  static targets = [ "container", "title", "duration", "completion", "status" ]
 
   connect() {
     console.log('Chunk Feed Controller: Connected')
@@ -26,22 +26,19 @@ export default class extends Controller {
         },
         received(data) {
           console.log('Chunk Feed: Incoming Chunk')
-          // if (data.completed_at) {
-          //   self.statusTarget.innerText = "Chunk Completed!"
-          //   self.element.classList.remove("active-chunk", "active-chunk--visible")
-          //   location.reload();
-          // } else {
-          //   self.element.classList.add(["active-chunk", "active-chunk--visible"])
-          // }
+          if (data.completed_at) {
+            self.statusTarget.innerText = "Chunk Completed!"
+            self.completionTarget.innerHTML = "Completed at: "
+          } else {
+
+          }
         }
       }
     )
   }
 
   create() {
-    // add code to create active chunk but don't use 'active chunk' for identification
-    // instead use indexes -- other wise a lot of CSS maneuvering needs to be done
-    // after every chunk without reload
+    // need to add frontend validations for chunk data (missing data, etc.)
 
     const list = this.containerTarget
     const chunk = document.createElement('li')
@@ -49,6 +46,7 @@ export default class extends Controller {
 
     chunk.innerHTML = content
     chunk.classList.add('chunk')
+    chunk.id = 'last-chunk'
     list.insertBefore(chunk, list.firstChild)
 
     console.log('Chunk Created and Rendered')
