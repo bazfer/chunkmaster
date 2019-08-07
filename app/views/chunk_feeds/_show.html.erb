@@ -1,25 +1,13 @@
 <section data-controller="chunk-feed">
   <% if current_user %>
-    <h3 id="testy">Chunks</h3>
     <%= hidden_field_tag :chunk_feed_id, @chunk_feed.id, id: 'chunk-feed-id' %>
 
-    <% if current_user.chunking? %>
-      <ul id='chunk-feed-container' style="list-style: none">
-        <%= render partial: './chunks/active_chunk', locals: { chunk: @chunk_feed.head, cssClass: 'active-chunk--visible' } %>
-        <% @chunk_feed.tail.each do |chunk| %>
-          <%= render partial: './chunks/show', locals: { chunk: chunk } %>
-        <% end %>
-      </ul>
+    <%= render partial: './chunks/new' %>
 
-    <% else %>
-      <ul id='chunk-feed-container' style="list-style: none">
-        <%= render partial: './chunks/active_chunk', locals: { chunk: @chunk, cssClass: '' }%>
-
-        <% @chunk_feed.sorted.each do |chunk| %>
-          <%= render partial: './chunks/show', locals: { chunk: chunk } %>
-        <% end %>
-      </ul>
-    <% end %>
-
+    <ul id='chunk-feed-container' style="list-style: none">
+      <% @chunk_feed.sorted.each do |chunk| %>
+        <%= render partial: './chunks/show', locals: { chunk: chunk } %>
+      <% end %>
+    </ul>
   <% end %>
 </section>
