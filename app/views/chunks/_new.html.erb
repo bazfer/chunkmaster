@@ -1,7 +1,15 @@
 <section>
-  <% if @chunking %>
-    <h3>You are currently chunking</h3>
+  <% if current_user.chunking? %>
+    <% user_status = "block" %>
+    <% new_chunk = "none" %>
   <% else %>
+    <% user_status = "none" %>
+    <% new_chunk = "block" %>
+  <% end %>
+
+  <h3 data-target="chunk-feed.userStatus" style='display: <%= user_status %>'>You are currently chunking</h3>
+
+  <div data-target="chunk-feed.newChunk" style='display: <%= new_chunk %>'>
     <%= form_for @chunk, url: { controller: "chunks", action: "create" },
                         html: { onsubmit: "this.submit(); this.reset();" },
                         data: { remote: true } do |f| %>
@@ -17,6 +25,6 @@
       <%= hidden_field_tag(:chunk_feed_id, current_user.chunk_feed.id) %>
 
       <%= f.submit "Create Chunk", data: { action: "chunk-feed#create" } %>
-    <% end %>
+    </div>
   <% end %>
 </section>

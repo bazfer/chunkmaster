@@ -1,13 +1,13 @@
 <li class="chunk" id=<%= chunk.id %> >
-  <% if Time.now >= chunk.completion_at %>
+  <% if chunk.completed? %>
     <div>
-      <h3 data-target="chunk-feed.status">Chunk Completed!</h3>
+      <h3 data-target="chunk-feed.chunkStatus">Chunk Completed!</h3>
       <span data-target="chunk-feed.completion">Completed at: </span>
       <span><%= chunk.completed_at %></span>
     </div>
   <% else %>
     <div>
-      <h3 data-target="chunk-feed.status">Chunk in Progress</h3>
+      <h3 data-target="chunk-feed.chunkStatus">Chunk in Progress</h3>
       <span data-target="chunk-feed.completion">Completion at: </span>
       <span><%= chunk.completion_at %></span>
     </div>
