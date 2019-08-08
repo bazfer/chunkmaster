@@ -27,10 +27,11 @@ export default class extends Controller {
         received(data) {
           console.log('Chunk Feed: Incoming Chunk')
           if (data.completed_at) {
-            self.chunkStatusTarget.innerText = "Chunk Completed!"
+            self.chunkStatusTarget.innerHTML = "Chunk Completed!"
             self.completionTarget.innerHTML = "Completed at: "
             self.newChunkTarget.setAttribute("style", "display: block;")
             self.userStatusTarget.setAttribute("style", "display: none;")
+            console.log('wrap it')
           }
 
           // this codes handles user status and new chunk toggle
