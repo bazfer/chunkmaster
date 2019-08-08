@@ -9,7 +9,6 @@ export default class extends Controller {
   static targets = [ "container", "title", "duration", "completion", "chunkStatus", "userStatus", "newChunk" ]
 
   connect() {
-    console.log('Chunk Feed Controller: Connected')
     let self = this
     cable.subscriptions.create(
       {
@@ -18,23 +17,17 @@ export default class extends Controller {
       },
       {
         connected() {
-          console.log('Chunk Feed: Established')
         },
         disconnected() {
           this.perform('unsubscribed')
-          console.log('Chunk Feed: Terminated')
         },
         received(data) {
-          console.log('Chunk Feed: Incoming Chunk')
           if (data.completed_at) {
             self.chunkStatusTarget.innerHTML = "Chunk Completed!"
             self.completionTarget.innerHTML = "Completed at: "
             self.newChunkTarget.setAttribute("style", "display: block;")
             self.userStatusTarget.setAttribute("style", "display: none;")
-            console.log('wrap it')
           }
-
-          // this codes handles user status and new chunk toggle
         }
       }
     )
@@ -49,14 +42,8 @@ export default class extends Controller {
 
     chunk.innerHTML = content
     chunk.classList.add('chunk')
-    chunk.id = 'last-chunk'
     list.insertBefore(chunk, list.firstChild)
-    console.log('Chunk Created and Rendered')
-
-
     this.newChunkTarget.setAttribute("style", "display: none;")
     this.userStatusTarget.setAttribute("style", "display: block;")
-
-
   }
 }
