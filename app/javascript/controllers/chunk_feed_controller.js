@@ -9,7 +9,7 @@ export default class extends Controller {
   static targets = [ "container", "title", "duration", "completion", "chunkStatus", "userStatus", "newChunk" ]
 
   connect() {
-    let self = this
+    const self = this
     cable.subscriptions.create(
       {
         channel: 'ChunkFeedChannel',
